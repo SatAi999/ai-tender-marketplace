@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  password        String
+  name            String?
+  company         String?
+  services        String?
+  subscriptionType String   @default("free") // "free" or "paid"
+  stripeCustomerId String?
+  tendersViewed   Int       @default(0)
+  proposalsGenerated Int    @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  savedTenders    SavedTender[]
+  proposals       Proposal[]
+  
+  @@map("users")
+}
+
+model Tender {
+  id               String   @id @default(cuid())
+  title            String
+  description      String
+  budget           Float?
+  deadline         DateTime?
+  category         String?
+  location         String?
+  requirements     String?
+  embedding        String?  // Store as JSON string for vector embeddings
+  
+  // New fields for scraped tender data
+  referenceNumber  String?  @unique // Original tender reference from source
+  sourceUrl        String?  // URL to original tender
+  organisation     String?  // Organisation posting the tender
+  isScraped        Boolean  @default(false) // Whether this tender was scraped
+  
+  createdAt        DateTime @default(now())
+  
+  savedBy          SavedTender[]
+  proposals        Proposal[]
+  
+  @@map("tenders")
+}
+
+model SavedTender {
+  id       String @id @default(cuid())
+  userId   String
+  tenderId String
+  
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tender   Tender @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, tenderId])
+  @@map("saved_tenders")
+}
+
+model Proposal {
+  id        String   @id @default(cuid())
+  userId    String
+  tenderId  String
+  content   String
+  status    String   @default("draft") // "draft", "submitted", "accepted", "rejected"
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tender    Tender   @relation(fields: [tenderId], references: [id], onDelete: Cascade)
+  
+  @@map("proposals")
+}

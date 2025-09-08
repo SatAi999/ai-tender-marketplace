@@ -1,103 +1,119 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            AI-Powered Tender Marketplace
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Discover relevant tenders, generate winning proposals with AI, and grow your business with our intelligent bidding platform.
+          </p>
+          
+          <div className="flex gap-4 justify-center mb-16">
+            <Link href="/auth/signup">
+              <Button size="lg" className="px-8 py-3">
+                Get Started
+              </Button>
+            </Link>
+            <Link href="/auth/signin">
+              <Button variant="outline" size="lg" className="px-8 py-3">
+                Sign In
+              </Button>
+            </Link>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="grid md:grid-cols-3 gap-8 mt-16">
+            <Link href="/tenders" className="transform transition-transform hover:scale-105">
+              <div className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl">
+                <div className="text-3xl mb-4">🎯</div>
+                <h3 className="text-xl font-semibold mb-2">Smart Tender Discovery</h3>
+                <p className="text-gray-600">
+                  AI-powered recommendations help you find the most relevant tenders for your business.
+                </p>
+                <div className="mt-4">
+                  <Button variant="outline" className="w-full">
+                    Browse Tenders
+                  </Button>
+                </div>
+              </div>
+            </Link>
+            
+            <Link href="/auth/signin" className="transform transition-transform hover:scale-105">
+              <div className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl">
+                <div className="text-3xl mb-4">✨</div>
+                <h3 className="text-xl font-semibold mb-2">AI Proposal Generation</h3>
+                <p className="text-gray-600">
+                  Generate compelling, professional proposals in minutes using advanced AI technology.
+                </p>
+                <div className="mt-4">
+                  <Button variant="outline" className="w-full">
+                    Try AI Generation
+                  </Button>
+                </div>
+              </div>
+            </Link>
+            
+            <Link href="/dashboard" className="transform transition-transform hover:scale-105">
+              <div className="bg-white p-6 rounded-lg shadow-lg cursor-pointer hover:shadow-xl">
+                <div className="text-3xl mb-4">📊</div>
+                <h3 className="text-xl font-semibold mb-2">Dashboard Analytics</h3>
+                <p className="text-gray-600">
+                  Track your proposals, monitor success rates, and manage your bidding pipeline.
+                </p>
+                <div className="mt-4">
+                  <Button variant="outline" className="w-full">
+                    View Dashboard
+                  </Button>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          <div className="mt-16 bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-3xl font-bold mb-6">Pricing Plans</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="border-2 border-gray-200 p-6 rounded-lg">
+                <h3 className="text-2xl font-bold mb-4">Free Plan</h3>
+                <p className="text-3xl font-bold text-blue-600 mb-4">$0<span className="text-lg font-normal">/month</span></p>
+                <ul className="text-left space-y-2 mb-6">
+                  <li>✓ View 3 tenders</li>
+                  <li>✓ Generate 1 AI proposal</li>
+                  <li>✓ Basic dashboard</li>
+                </ul>
+                <Link href="/auth/signup">
+                  <Button variant="outline" className="w-full">
+                    Start Free
+                  </Button>
+                </Link>
+              </div>
+              
+              <div className="border-2 border-blue-500 p-6 rounded-lg relative">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm">
+                  Popular
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Pro Plan</h3>
+                <p className="text-3xl font-bold text-blue-600 mb-4">$29.99<span className="text-lg font-normal">/month</span></p>
+                <ul className="text-left space-y-2 mb-6">
+                  <li>✓ Unlimited tender views</li>
+                  <li>✓ Unlimited AI proposals</li>
+                  <li>✓ PDF downloads</li>
+                  <li>✓ Priority support</li>
+                  <li>✓ Advanced analytics</li>
+                </ul>
+                <Link href="/auth/signup">
+                  <Button className="w-full">
+                    Upgrade to Pro
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
-  );
+  )
 }
